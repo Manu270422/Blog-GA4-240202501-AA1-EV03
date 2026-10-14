@@ -1,0 +1,75 @@
+/* ============================================================
+   variables.css — Design tokens for My English Journal
+   Carlos Manuel Turizo Hernández · GA4-240202501-AA1-EV03
+   ============================================================ */
+
+:root {
+  /* ── Color palette ── */
+  --ink:          #1A2236;
+  --ink-soft:     #2C3B52;
+  --ink-muted:    #4A5568;
+  --paper:        #F7F3E8;
+  --paper-alt:    #F0EAD6;
+  --paper-card:   #FFFDF7;
+  --rule:         #E0D8C5;
+  --rule-light:   rgba(30,42,60,0.06);
+
+  --amber:        #C8852C;
+  --amber-light:  #F5DFB0;
+  --amber-dark:   #9E6A20;
+  --teal:         #2A6F6A;
+  --teal-light:   #B2D8D5;
+  --rose:         #A34240;
+  --rose-light:   #F2C8C7;
+  --navy:         #1A2236;
+  --navy-light:   #C5CCDA;
+  --violet:       #5C3D8F;
+  --violet-light: #D5C9F0;
+  --forest:       #2D6A4F;
+  --forest-light: #B7DFCF;
+
+  /* Category colours mapped per entry */
+  --cat-family:   #A34240;
+  --cat-hobbies:  #2A6F6A;
+  --cat-work:     #C8852C;
+  --cat-travel:   #1A2236;
+  --cat-events:   #2A6F6A;
+  --cat-thinking: #A34240;
+  --cat-crime:    #1A2236;
+
+  /* ── Typography ── */
+  --font-serif:   'Lora', Georgia, serif;
+  --font-sans:    'Work Sans', system-ui, sans-serif;
+
+  /* ── Spacing ── */
+  --sidebar-w:    300px;
+  --content-max:  840px;
+  --gap-xs:       .4rem;
+  --gap-sm:       .8rem;
+  --gap-md:       1.4rem;
+  --gap-lg:       2.2rem;
+  --gap-xl:       3.8rem;
+
+  /* ── Radius ── */
+  --r-sm:   6px;
+  --r-md:   12px;
+  --r-lg:   20px;
+  --r-full: 9999px;
+
+  /* ── Shadows ── */
+  --shadow-sm:  0 1px 4px rgba(26,34,54,.07);
+  --shadow-md:  0 4px 18px rgba(26,34,54,.10);
+  --shadow-lg:  0 12px 40px rgba(26,34,54,.14);
+  --shadow-xl:  0 24px 64px rgba(26,34,54,.18);
+
+  /* ── Motion ── */
+  --ease-out:   cubic-bezier(.22, 1, .36, 1);
+  --ease-spring:cubic-bezier(.34, 1.56, .64, 1);
+  --dur-fast:   180ms;
+  --dur-mid:    320ms;
+  --dur-slow:   520ms;
+
+  /* ── Notebook lines ── */
+  --line-gap:   40px;
+  --line-color: rgba(30,42,60,0.055);
+}

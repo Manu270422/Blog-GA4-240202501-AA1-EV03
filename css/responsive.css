@@ -1,0 +1,199 @@
+/* ============================================================
+   responsive.css — Breakpoints & adaptive styles
+   Breakpoints:
+     xs  < 480px   (small phones)
+     sm  480–767px (large phones)
+     md  768–1023px (tablets)
+     lg  1024–1279px (small laptops)
+     xl  1280–1535px (laptops/desktops)
+     2xl 1536px+    (large screens)
+   ============================================================ */
+
+/* ── Large screens: wider sidebar, more breathing room ── */
+@media (min-width: 1536px) {
+  :root { --sidebar-w: 320px; }
+
+  .cover h2       { font-size: 3.6rem; }
+  .section-pad    { padding-left: 5.5rem; padding-right: 5.5rem; }
+  .entry          { padding-left: 5.5rem; padding-right: 5.5rem; }
+  footer          { padding-left: 5.5rem; padding-right: 5.5rem; }
+  .cover          { padding-left: 5.5rem; padding-right: 5.5rem; }
+}
+
+/* ── Laptop / desktop (1024–1279px) ── */
+@media (max-width: 1279px) {
+  :root { --sidebar-w: 270px; }
+}
+
+/* ── Tablets (768–1023px) ── */
+@media (max-width: 1023px) {
+  :root { --sidebar-w: 250px; }
+
+  .cover h2 { font-size: 2.4rem; }
+}
+
+/* ── Mobile breakpoint: sidebar becomes off-canvas ── */
+@media (max-width: 767px) {
+  /* Show menu toggle */
+  #menu-toggle {
+    display: flex;
+  }
+
+  /* Show close button inside sidebar */
+  #nav-close {
+    display: flex;
+  }
+
+  /* Sidebar slides off to the left */
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: min(300px, 85vw);
+    transform: translateX(-100%);
+    transition: transform var(--dur-mid) var(--ease-out);
+    z-index: 120;
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+    box-shadow: var(--shadow-xl);
+  }
+
+  /* Main takes full width */
+  main {
+    width: 100%;
+  }
+
+  /* Adjust content spacing */
+  .cover {
+    padding-top: 4.5rem; /* room for menu button */
+  }
+
+  /* Full-width entries */
+  .entry {
+    padding-left: 1.4rem;
+    padding-right: 1.4rem;
+  }
+
+  footer {
+    padding-left: 1.4rem;
+    padding-right: 1.4rem;
+  }
+
+  /* Reading ring repositioned */
+  #read-ring {
+    bottom: 1rem;
+    right: 1rem;
+    width: 40px;
+    height: 40px;
+  }
+
+  /* Pull quotes narrower */
+  .pull-quote {
+    font-size: .95rem;
+  }
+
+  /* Stats wrap tightly */
+  .cover-stats {
+    gap: .5rem 1rem;
+  }
+
+  .stat-divider { display: none; }
+}
+
+/* ── Small phones (< 480px) ── */
+@media (max-width: 479px) {
+  :root { --line-gap: 36px; }
+
+  .cover {
+    padding-top: 5rem;
+    padding-bottom: 2rem;
+  }
+
+  .cover h2 {
+    font-size: 1.75rem;
+  }
+
+  .cover .lede {
+    font-size: .96rem;
+  }
+
+  .entry h3 {
+    font-size: 1.25rem;
+  }
+
+  .entry p {
+    font-size: .95rem;
+  }
+
+  .tag { font-size: .7rem; }
+
+  /* Footer stacked */
+  footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: .8rem;
+  }
+
+  .footer-badge {
+    margin-left: 0;
+  }
+}
+
+/* ── Very large / ultra-wide ── */
+@media (min-width: 1920px) {
+  :root { --sidebar-w: 340px; }
+
+  main {
+    max-width: 1200px;
+  }
+
+  .wrap {
+    max-width: 1540px;
+    margin: 0 auto;
+    box-shadow: var(--shadow-xl);
+  }
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .reveal,
+  .reveal-stagger > * {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  #trail-canvas {
+    display: none;
+  }
+}
+
+/* ── Print ── */
+@media print {
+  .sidebar,
+  #menu-toggle,
+  #trail-canvas,
+  #page-progress,
+  #read-ring {
+    display: none !important;
+  }
+
+  main {
+    width: 100%;
+  }
+
+  .entry {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}

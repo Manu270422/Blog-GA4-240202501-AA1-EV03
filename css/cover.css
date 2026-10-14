@@ -1,0 +1,184 @@
+/* ============================================================
+   cover.css — Hero / cover page section
+   ============================================================ */
+
+.cover {
+  padding: clamp(3rem, 8vw, 6rem) clamp(1.4rem, 5vw, 4.5rem) clamp(2.5rem, 5vw, 4rem);
+  border-bottom: 1px solid var(--rule);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decorative ink-blot background shapes */
+.cover::before {
+  content: '';
+  position: absolute;
+  top: -80px;
+  right: -60px;
+  width: 340px;
+  height: 340px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(200,133,44,.09) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.cover::after {
+  content: '';
+  position: absolute;
+  bottom: -60px;
+  left: 30%;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(42,111,106,.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* ── Kicker / label ── */
+.cover .kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  color: var(--teal);
+  font-size: .83rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  padding: .3rem .8rem .3rem .5rem;
+  background: rgba(42,111,106,.08);
+  border-radius: var(--r-full);
+  border: 1px solid rgba(42,111,106,.18);
+}
+
+.kicker-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--teal);
+  animation: dot-blink 1.8s ease-in-out infinite;
+}
+
+@keyframes dot-blink {
+  0%,100% { opacity: 1; }
+  50%      { opacity: .3; }
+}
+
+/* ── Main headline ── */
+.cover h2 {
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  line-height: 1.12;
+  color: var(--ink);
+  max-width: 18ch;
+  margin-bottom: 1.2rem;
+  position: relative;
+}
+
+/* Underline accent on last word */
+.cover h2 .accent-line {
+  position: relative;
+  display: inline;
+}
+
+.cover h2 .accent-line::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: .05em;
+  width: 100%;
+  height: .18em;
+  background: linear-gradient(90deg, var(--amber), rgba(200,133,44,.3));
+  border-radius: 2px;
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: underline-draw 0.7s var(--ease-out) 0.6s forwards;
+}
+
+@keyframes underline-draw {
+  to { transform: scaleX(1); }
+}
+
+/* ── Lead paragraph ── */
+.cover .lede {
+  max-width: 58ch;
+  font-size: 1.05rem;
+  line-height: 1.78;
+  color: #4A4235;
+  margin-bottom: 2rem;
+}
+
+/* ── Entry count strip ── */
+.cover-stats {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--gap-sm) var(--gap-md);
+  margin-bottom: 1.8rem;
+}
+
+.stat-item {
+  display: flex;
+  align-items: baseline;
+  gap: .3rem;
+}
+
+.stat-num {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: .78rem;
+  color: var(--ink-muted);
+  font-weight: 500;
+}
+
+.stat-divider {
+  width: 1px;
+  height: 24px;
+  background: var(--rule);
+}
+
+/* ── Tag row ── */
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .45rem;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  font-size: .76rem;
+  font-weight: 600;
+  padding: .35rem .75rem;
+  border: 1.5px solid var(--rule);
+  border-radius: var(--r-full);
+  color: var(--ink-muted);
+  background: var(--paper-card);
+  cursor: default;
+  transition:
+    border-color var(--dur-fast),
+    color var(--dur-fast),
+    transform var(--dur-fast) var(--ease-spring),
+    box-shadow var(--dur-fast);
+}
+
+.tag:hover {
+  border-color: var(--amber);
+  color: var(--amber-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(200,133,44,.15);
+}
+
+.tag-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: .6;
+}

@@ -1,0 +1,291 @@
+/* ============================================================
+   sidebar.css — Navigation sidebar
+   ============================================================ */
+
+/* ── Sidebar shell ── */
+.sidebar {
+  width: var(--sidebar-w);
+  flex-shrink: 0;
+  background: var(--ink);
+  color: #EDE7D6;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 100;
+  transition: width var(--dur-mid) var(--ease-out),
+              transform var(--dur-mid) var(--ease-out);
+}
+
+/* Decorative gradient overlay at bottom */
+.sidebar::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background: linear-gradient(to top, rgba(10,15,30,.6), transparent);
+  pointer-events: none;
+}
+
+/* ── Sidebar scrollable inner ── */
+.sidebar-inner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,.12) transparent;
+  padding: 2rem 1.6rem 3rem;
+  gap: var(--gap-lg);
+}
+
+.sidebar-inner::-webkit-scrollbar { width: 4px; }
+.sidebar-inner::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,.14);
+  border-radius: var(--r-full);
+}
+
+/* ── Brand / avatar block ── */
+.sidebar-brand {
+  display: flex;
+  flex-direction: column;
+  gap: .9rem;
+}
+
+.avatar-wrap {
+  display: flex;
+  align-items: center;
+  gap: .9rem;
+}
+
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--amber), var(--amber-dark));
+  color: #fff;
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 3px rgba(200,133,44,.25);
+  position: relative;
+}
+
+/* Pulse ring on avatar */
+.avatar::after {
+  content: '';
+  position: absolute;
+  inset: -5px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(200,133,44,.35);
+  animation: avatar-pulse 2.8s ease-in-out infinite;
+}
+
+@keyframes avatar-pulse {
+  0%,100% { transform: scale(1);   opacity: .6; }
+  50%      { transform: scale(1.1); opacity: 0;  }
+}
+
+.brand-text h1 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.25;
+  margin: 0;
+}
+
+.brand-text .role {
+  font-size: .75rem;
+  color: #8FA0B8;
+  line-height: 1.5;
+  margin-top: .2rem;
+}
+
+/* Decorative separator */
+.sidebar-sep {
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(255,255,255,.12), transparent);
+  flex-shrink: 0;
+}
+
+/* ── Section label ── */
+.nav-label {
+  font-size: .65rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: #6B7D95;
+  font-weight: 600;
+  margin-bottom: .3rem;
+  padding-left: .5rem;
+}
+
+/* ── Nav list ── */
+nav ul {
+  display: flex;
+  flex-direction: column;
+  gap: .08rem;
+}
+
+nav a {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  color: #B0BED0;
+  font-size: .88rem;
+  font-weight: 500;
+  padding: .62rem .75rem;
+  border-radius: var(--r-md);
+  border-left: 3px solid transparent;
+  transition:
+    background var(--dur-fast) var(--ease-out),
+    color      var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out),
+    transform  var(--dur-fast) var(--ease-out);
+  position: relative;
+}
+
+nav a:hover {
+  color: #fff;
+  background: rgba(255,255,255,.07);
+  transform: translateX(2px);
+}
+
+nav a.active {
+  color: #fff;
+  background: rgba(200,133,44,.15);
+  border-left-color: var(--amber);
+}
+
+nav a .nav-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--r-sm);
+  background: var(--nav-icon-bg, rgba(255,255,255,.06));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background var(--dur-fast) var(--ease-out);
+}
+
+nav a:hover .nav-icon,
+nav a.active .nav-icon {
+  background: var(--nav-icon-bg-active, rgba(200,133,44,.25));
+}
+
+nav a svg {
+  width: 15px;
+  height: 15px;
+  stroke: currentColor;
+  flex-shrink: 0;
+}
+
+nav a .nav-number {
+  margin-left: auto;
+  font-size: .68rem;
+  color: #4E5F75;
+  background: rgba(255,255,255,.05);
+  padding: .1rem .45rem;
+  border-radius: var(--r-full);
+  font-weight: 600;
+  transition: color var(--dur-fast), background var(--dur-fast);
+}
+
+nav a.active .nav-number,
+nav a:hover .nav-number {
+  color: var(--amber);
+  background: rgba(200,133,44,.15);
+}
+
+/* ── Sidebar footer info ── */
+.sidebar-info {
+  margin-top: auto;
+  padding-top: 1.2rem;
+  border-top: 1px solid rgba(255,255,255,.08);
+  font-size: .7rem;
+  color: #5A6A80;
+  line-height: 1.7;
+}
+
+.sidebar-info strong {
+  color: #8FA0B8;
+  display: block;
+  margin-bottom: .15rem;
+}
+
+.sidebar-info .info-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: .3rem;
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: var(--r-full);
+  padding: .2rem .55rem;
+  font-size: .65rem;
+  color: #6B7D95;
+  margin-top: .5rem;
+  margin-right: .3rem;
+}
+
+/* ── Mobile menu toggle ── */
+#menu-toggle {
+  display: none;
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 200;
+  width: 42px;
+  height: 42px;
+  border-radius: var(--r-md);
+  background: var(--ink);
+  color: #fff;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-md);
+  transition: transform var(--dur-fast) var(--ease-spring);
+}
+
+#menu-toggle:active {
+  transform: scale(.93);
+}
+
+#menu-toggle svg {
+  width: 20px;
+  height: 20px;
+  stroke: #fff;
+}
+
+/* ── Close button (inside sidebar on mobile) ── */
+#nav-close {
+  display: none;
+  align-self: flex-end;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.08);
+  color: #fff;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-bottom: -.5rem;
+  transition: background var(--dur-fast);
+}
+
+#nav-close svg {
+  width: 16px;
+  height: 16px;
+  stroke: #fff;
+}
+
+#nav-close:hover {
+  background: rgba(255,255,255,.16);
+}

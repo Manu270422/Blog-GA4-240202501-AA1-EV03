@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="My English Journal — Carlos Manuel Turizo Hernández. GA4-240202501-AA1-EV03. ADSO, SENA." />
+  <title>My English Journal — Carlos Manuel Turizo Hernández</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheets (order matters) -->
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/sidebar.css" />
+  <link rel="stylesheet" href="css/cover.css" />
+  <link rel="stylesheet" href="css/entries.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+
+<!-- ── Page-load progress bar ── -->
+<div id="page-progress" role="progressbar" aria-label="Page loading"></div>
+
+<!-- ── Ink trail canvas ── -->
+<canvas id="trail-canvas" aria-hidden="true"></canvas>
+
+<!-- ── Mobile menu toggle ── -->
+<button id="menu-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="sidebar">
+  <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <line x1="3" y1="6"  x2="21" y2="6"/>
+    <line x1="3" y1="12" x2="21" y2="12"/>
+    <line x1="3" y1="18" x2="21" y2="18"/>
+  </svg>
+</button>
+
+<!-- ── Nav overlay (mobile) ── -->
+<div id="nav-overlay" aria-hidden="true"></div>
+
+<!-- ── Reading progress ring ── -->
+<div id="read-ring" role="progressbar" aria-label="Reading progress" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+  <div class="ring-bg"></div>
+  <svg viewBox="0 0 46 46" width="46" height="46">
+    <circle class="track" cx="23" cy="23" r="19"/>
+    <circle class="fill"  cx="23" cy="23" r="19"/>
+  </svg>
+</div>
+
+<!-- ════════════════════════════════════════════════════════ -->
+<div class="wrap">
+
+  <!-- ══ SIDEBAR ══════════════════════════════════════════ -->
+  <aside class="sidebar" id="sidebar" aria-label="Site navigation">
+    <div class="sidebar-inner">
+
+      <!-- Close button (mobile) -->
+      <button id="nav-close" aria-label="Close navigation">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+
+      <!-- Brand -->
+      <div class="sidebar-brand">
+        <div class="avatar-wrap">
+          <div class="avatar" aria-hidden="true">CT</div>
+          <div class="brand-text">
+            <h1>My English Journal</h1>
+            <p class="role">Carlos Manuel Turizo Hernández<br/>ADSO · SENA · Ficha 3388995</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-sep" aria-hidden="true"></div>
+
+      <!-- Navigation -->
+      <nav aria-label="Blog entries">
+        <p class="nav-label">Entries</p>
+        <ul>
+          <li>
+            <a href="#family"
+               style="--nav-icon-bg: rgba(163,66,64,.14); --nav-icon-bg-active: rgba(163,66,64,.28);">
+              <span class="nav-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M3 12l9-9 9 9"/>
+                  <path d="M5 10v10h14V10"/>
+                </svg>
+              </span>
+              Family
+              <span class="nav-number">01</span>
+            </a>
+          </li>
+          <li>
+            <a href="#hobbies"
+               style="--nav-icon-bg: rgba(42,111,106,.14); --nav-icon-bg-active: rgba(42,111,106,.28);">
+              <span class="nav-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="2" y="7" width="20" height="10" rx="4"/>
+                  <circle cx="8" cy="12" r="1.4"/>
+                  <circle cx="16" cy="12" r="1.4"/>
+                </svg>
+              </span>
+              Hobbies &amp; Interests
+              <span class="nav-number">02</span>
+            </a>
+          </li>
+          <li>
+            <a href="#work"
+               style="--nav-icon-bg: rgba(200,133,44,.14); --nav-icon-bg-active: rgba(200,133,44,.28);">
+              <span class="nav-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="3" y="7" width="18" height="13" rx="1.5"/>
+                  <path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                </svg>
+              </span>
+              Work
+              <span class="nav-number">03</span>
+            </a>
+          </li>
+          <li>
+            <a href="#travel"
+               style="--nav-icon-bg: rgba(26,34,54,.22); --nav-icon-bg-active: rgba(26,34,54,.40);">
+              <span class="nav-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z"/>
+                  <circle cx="12" cy="10" r="2.4"/>
+                </svg>
+              </span>
+              Travel
+              <span class="nav-number">04</span>
+            </a>
+          </li>
+          <li>
+            <a href="#current-events"
+               style="--nav-icon-bg: rgba(42,111,106,.14); --nav-icon-bg-active: rgba(42,111,106,.28);">
+              <span class="nav-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M4 4h13l3 3v13H4z"/>
+                  <path d="M8 9h9M8 13h9M8 17h5"/>
+                </svg>
+              </span>
+              Current Events
+              <span class="nav-number">05</span>
+            </a>
+          </li>
+          <li>
+            <a href="#critical-thinking"
+               style="--nav-icon-bg: rgba(163,66,64,.14); --nav-icon-bg-active: rgba(163,66,64,.28);">
+              <span class="nav-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M9 18h6"/>
+                  <path d="M10 22h4"/>
+                  <path d="M12 2a6 6 0 0 0-4 10.5c.6.5 1 1.3 1 2.1V16h6v-1.4c0-.8.4-1.6 1-2.1A6 6 0 0 0 12 2z"/>
+                </svg>
+              </span>
+              Critical Thinking
+              <span class="nav-number">06</span>
+            </a>
+          </li>
+          <li>
+            <a href="#crime-punishment"
+               style="--nav-icon-bg: rgba(26,34,54,.22); --nav-icon-bg-active: rgba(26,34,54,.40);">
+              <span class="nav-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M12 3v3"/>
+                  <path d="M4 8l4-2 4 2-4 2z"/>
+                  <path d="M20 8l-4-2-4 2 4 2z"/>
+                  <path d="M4 8v3a4 4 0 0 0 8 0V8"/>
+                  <path d="M12 8v3a4 4 0 0 0 8 0V8"/>
+                  <path d="M6 21h12"/>
+                  <path d="M12 12v9"/>
+                </svg>
+              </span>
+              Crime &amp; Punishment
+              <span class="nav-number">07</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Sidebar footer -->
+      <div class="sidebar-info">
+        <strong>Análisis y Desarrollo de Software</strong>
+        GA4-240202501-AA1-EV03 · Blog<br/>
+        SENA — Ficha 3388995
+        <div style="margin-top:.6rem; display:flex; flex-wrap:wrap; gap:.3rem;">
+          <span class="info-chip">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+            7 entries
+          </span>
+          <span class="info-chip">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M4 4h16v16H4z"/><path d="M4 9h16M9 21V9"/></svg>
+            English B1
+          </span>
+        </div>
+      </div>
+
+    </div><!-- /sidebar-inner -->
+  </aside>
+
+  <!-- ══ MAIN ═════════════════════════════════════════════ -->
+  <main>
+
+    <!-- Cover / hero -->
+    <section class="cover ruled" aria-labelledby="journal-title">
+
+      <p class="kicker anim-fade-in delay-1">
+        <span class="kicker-dot" aria-hidden="true"></span>
+        A learning journal
+      </p>
+
+      <h2 id="journal-title" class="anim-fade-up delay-2">
+        Notes from my journey with English,
+        <span class="accent-line">code</span>, and everyday life
+      </h2>
+
+      <p class="lede anim-fade-up delay-3">
+        I am <strong>Carlos Manuel Turizo Hernández</strong>, a Software Analysis and
+        Development (ADSO) student at SENA and an Informatics Engineering student at
+        UNIPAZ, in Barrancabermeja, Colombia. This blog collects seven entries about
+        my life, my work, and two topics from our English course: critical thinking
+        and crime and punishment.
+      </p>
+
+      <div class="cover-stats anim-fade-up delay-4">
+        <div class="stat-item">
+          <span class="stat-num">7</span>
+          <span class="stat-label">entries</span>
+        </div>
+        <div class="stat-divider" aria-hidden="true"></div>
+        <div class="stat-item">
+          <span class="stat-num">~8</span>
+          <span class="stat-label">min read</span>
+        </div>
+        <div class="stat-divider" aria-hidden="true"></div>
+        <div class="stat-item">
+          <span class="stat-num">B1</span>
+          <span class="stat-label">English level</span>
+        </div>
+      </div>
+
+      <div class="tag-row reveal-stagger anim-fade-up delay-5">
+        <span class="tag" data-target="family">
+          <span class="tag-dot" style="color:var(--cat-family);" aria-hidden="true"></span>Family
+        </span>
+        <span class="tag" data-target="hobbies">
+          <span class="tag-dot" style="color:var(--cat-hobbies);" aria-hidden="true"></span>Hobbies &amp; Interests
+        </span>
+        <span class="tag" data-target="work">
+          <span class="tag-dot" style="color:var(--cat-work);" aria-hidden="true"></span>Work
+        </span>
+        <span class="tag" data-target="travel">
+          <span class="tag-dot" style="color:var(--cat-travel);" aria-hidden="true"></span>Travel
+        </span>
+        <span class="tag" data-target="current-events">
+          <span class="tag-dot" style="color:var(--cat-events);" aria-hidden="true"></span>Current Events
+        </span>
+        <span class="tag" data-target="critical-thinking">
+          <span class="tag-dot" style="color:var(--cat-thinking);" aria-hidden="true"></span>Critical Thinking
+        </span>
+        <span class="tag" data-target="crime-punishment">
+          <span class="tag-dot" style="color:var(--cat-crime);" aria-hidden="true"></span>Crime &amp; Punishment
+        </span>
+      </div>
+
+    </section>
+    <!-- /cover -->
+
+    <!-- ══ ENTRIES ══════════════════════════════════════════ -->
+    <div class="entries ruled">
+
+      <!-- 01 · Family -->
+      <article class="entry reveal" id="family"
+               style="--cat-color: var(--cat-family); --cat-rgb: 163,66,64;"
+               aria-labelledby="title-family">
+        <div class="entry-meta">
+          <div class="entry-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 12l9-9 9 9"/>
+              <path d="M5 10v10h14V10"/>
+            </svg>
+          </div>
+          <div class="entry-labels">
+            <div class="entry-cat">Family</div>
+            <div class="entry-num">Post 1 of 7</div>
+          </div>
+          <div class="entry-progress" aria-hidden="true">
+            <span class="progress-pip filled"></span>
+            <span class="progress-pip"></span>
+            <span class="progress-pip"></span>
+            <span class="progress-pip"></span>
+            <span class="progress-pip"></span>
+            <span class="progress-pip"></span>
+            <span class="progress-pip"></span>
+          </div>
+        </div>
+
+        <h3 id="title-family">My Family, My First Team</h3>
+
+        <p>I have a twin brother named <strong>Jesús Alberto Turizo Hernández</strong>, and growing up with him has always felt like having a partner for everything. We share many memories, and we also share the experience of studying at the same time, which is not always easy but keeps us motivated.</p>
+
+        <p>My family has always supported my studies. When I decided to study Informatics Engineering and, later, to join the ADSO program at SENA, my parents encouraged me to keep learning, even when I had to manage classes, projects, and work at the same time. I think that <span class="highlight">a supportive family is the first team a person can have</span>, because they are the people who believe in you before anyone else does.</p>
+
+        <blockquote class="pull-quote">"Family is not only about living together; it is about growing together, too."</blockquote>
+
+        <p>Today, I try to make my family proud by finishing my projects and by building a better future through technology. Every achievement I reach belongs a little bit to all of them.</p>
+
+        <span class="read-time">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M12 8v4l3 3"/>
+          </svg>
+          <span class="read-time-count">1 min read</span>
+        </span>
+      </article>
+
+      <!-- 02 · Hobbies -->
+      <article class="entry reveal" id="hobbies"
+               style="--cat-color: var(--cat-hobbies); --cat-rgb: 42,111,106;"
+               aria-labelledby="title-hobbies">
+        <div class="entry-meta">
+          <div class="entry-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="7" width="20" height="10" rx="4"/>
+              <circle cx="8" cy="12" r="1.4"/>
+              <circle cx="16" cy="12" r="1.4"/>
+            </svg>
+          </div>
+          <div class="entry-labels">
+            <div class="entry-cat">Hobbies &amp; Interests</div>
+            <div class="entry-num">Post 2 of 7</div>
+          </div>
+          <div class="entry-progress" aria-hidden="true">
+            <span class="progress-pip filled"></span>
+            <span class="progress-pip filled"></span>
+            <span class="progress-pip"></span>
+            <span class="progress-pip"></span>
+            <span class="progress-pip"></span>
+            <span class="progress-pip"></span>
+            <span class="progress-pip"></span>
+          </div>
+        </div>
+
+        <h3 id="title-hobbies">Building Worlds: My Passion for Games and Code</h3>
+
+        <p>One of my biggest interests is <strong>game development</strong>. I enjoy designing small browser games, thinking about the rules, the characters, and how a player will feel while playing. For me, a good game is like a small world that someone else can visit and enjoy.</p>
+
+        <p>I also love web design. Through my personal project, <strong>"El Mundo de Manu,"</strong> I have created different sections about technology, gaming, education, and other topics that interest me. I consider that <span class="highlight">building your own digital space teaches you much more than any tutorial</span>, because you have to solve real problems by yourself.</p>
+
+        <p>In my free time, I usually study new programming techniques, watch tutorials about 3D animations, or sketch ideas for a new game. These hobbies are not just entertainment for me; they are also practice for my future career as a developer.</p>
+
+        <span class="read-time">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M12 8v4l3 3"/>
+          </svg>
+          <span class="read-time-count">1 min read</span>
+        </span>
+      </article>
+
+      <!-- 03 · Work -->
+      <article class="entry reveal" id="work"
+               style="--cat-color: var(--cat-work); --cat-rgb: 200,133,44;"
+               aria-labelledby="title-work">
+        <div class="entry-meta">
+          <div class="entry-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="7" width="18" height="13" rx="1.5"/>
+              <path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+            </svg>
+          </div>
+          <div class="entry-labels">
+            <div class="entry-cat">Work</div>
+            <div class="entry-num">Post 3 of 7</div>
+          </div>
+          <div class="entry-progress" aria-hidden="true">
+            <span class="progress-pip filled"></span>
+            <span class="progress-pip filled"></span>
+            <span class="progress-pip filled"></span>
+            <span class="progress-pip"></span>
+            <span class="progress-pip"></span>
+            <span class="progress-pip"></span>
+            <span class="progress-pip"></span>
+          </div>
+        </div>
+
+        <h3 id="title-work">Balancing Work and Study</h3>
+
+        <p>Besides studying, I work as a <strong>secretary</strong> for a foundation called <em>Elvira &amp; Sabina</em>. In this job, I have to organize documents, answer emails, and support different educational projects. It is a role that requires order and responsibility, two skills that also help me in my studies.</p>
+
+        <p>Balancing work, the ADSO program, and my engineering degree is not always simple. I have to plan my week carefully, and I must respect deadlines in both places. However, I think that <span class="highlight">this experience is preparing me for real professional life</span>, where students often have to combine study and work at the same time.</p>
+
+        <p>In the future, I would like to work as a <strong>web developer</strong>, combining the organizational skills I am learning now with the technical skills I am building in the ADSO program.</p>
+
+        <span class="read-time">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M12 8v4l3 3"/>
+          </svg>
+          <span class="read-time-count">1 min read</span>
+        </span>
+      </article>
+
+      <!-- 04 · Travel -->
+      <article class="entry reveal" id="travel"
+               style="--cat-color: var(--cat-travel); --cat-rgb: 26,34,54;"
+               aria-labelledby="title-travel">
+        <div class="entry-meta">
+          <div class="entry-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z"/>
+              <circle cx="12" cy="10" r="2.4"/>
+            </svg>
+          </div>
+          <div class="entry-labels">
+            <div class="entry-cat">Travel — A touristic place in my region</div>
+            <div class="entry-num">Post 4 of 7</div>
+          </div>
+          <div class="entry-progress" aria-hidden="true">
+            <span class="progress-pip filled"></span>
+            <span class="progress-pip filled"></span>
+            <span class="progress-pip filled"></span>
+            <span class="progress-pip filled"></span>
+            <span class="progress-pip"></span>
+            <span class="progress-pip"></span>
+            <span class="progress-pip"></span>
+          </div>
+        </div>
+
+        <h3 id="title-travel">El Cristo Petrolero: A Symbol of My Hometown</h3>
+
+        <p>One of the most impressive places in my region is the <strong>Cristo Petrolero</strong>, located on the Malecón, next to the Miramar swamp, in Barrancabermeja. It stands right in front of the biggest oil refinery in the country, and it is a huge metallic statue, <strong>26 meters tall</strong>, with its arms open to the sky.</p>
+
+        <p>The statue was designed by <em>Fernando Fernández</em>, a refinery worker, and it was built together with 20 other workers. It was inaugurated in 1995 and donated by Ecopetrol to make the city more beautiful. At night, the lights and the water fountain around it <span class="highlight">make the whole place look magical</span>, and during the day, you can walk along a path with metal dinosaur figures and typical swamp vegetation.</p>
+
+        <blockquote class="pull-quote">"A city built around the oil industry, but also full of art, nature, and history."</blockquote>
+
+        <p>I chose this place because it represents the identity of my region. I believe every visitor should see it at least once.</p>
+
+        <span class="read-time">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M12 8v4l3 3"/>
+          </svg>
+          <span class="read-time-count">1 min read</span>
+        </span>
+      </article>
+
+      <!-- 05 · Current Events -->
+      <article class="entry reveal" id="current-events"
+               style="--cat-color: var(--cat-events); --cat-rgb: 42,111,106;"
+               aria-labelledby="title-events">
+        <div class="entry-meta">
+          <div class="entry-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h13l3 3v13H4z"/>
+              <path d="M8 9h9M8 13h9M8 17h5"/>
+            </svg>
+          </div>
+          <div class="entry-labels">
+            <div class="entry-cat">Current Events</div>
+            <div class="entry-num">Post 5 of 7</div>
+          </div>
+          <div class="entry-progress" aria-hidden="true">
+            <span class="progress-pip filled"></span>
+            <span class="progress-pip filled"></span>
+            <span class="progress-pip filled"></span>
+            <span class="progress-pip filled"></span>
+            <span class="progress-pip filled"></span>
+            <span class="progress-pip"></span>
+            <span class="progress-pip"></span>
+          </div>
+        </div>
+
+        <h3 id="title-events">Technology Is Changing How We Learn</h3>
+
+        <p>In the last few years, <strong>virtual and hybrid education</strong> has grown very fast in Colombia. Programs like the one I am taking at SENA now offer virtual training, so students can study from home while they keep working or taking care of their families.</p>
+
+        <p>I have also noticed that more people are using <strong>artificial intelligence tools</strong> to study, practice languages, and organize their projects. I think that <span class="highlight">technology does not replace teachers, but it gives students more ways to learn</span>, especially for people who cannot attend a classroom every day.</p>
+
+        <p>As a software student, I find this trend exciting, because it means that the tools I am learning to build today could help other students in the same situation as me in the future.</p>
+
+        <span class="read-time">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M12 8v4l3 3"/>
+          </svg>
+          <span class="read-time-count">1 min read</span>
+        </span>
+      </article>
+
+      <!-- 06 · Critical Thinking -->
+      <article class="entry reveal" id="critical-thinking"
+               style="--cat-color: var(--cat-thinking); --cat-rgb: 163,66,64;"
+               aria-labelledby="title-thinking">
+        <div class="entry-meta">
+          <div class="entry-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 18h6"/>
+              <path d="M10 22h4"/>
+              <path d="M12 2a6 6 0 0 0-4 10.5c.6.5 1 1.3 1 2.1V16h6v-1.4c0-.8.4-1.6 1-2.1A6 6 0 0 0 12 2z"/>
+            </svg>
+          </div>
+          <div class="entry-labels">
+            <div class="entry-cat">Critical Thinking &amp; Media Literacy</div>
+            <div class="entry-num">Post 6 of 7</div>
+          </div>
+          <div class="entry-progress" aria-hidden="true">
+            <span class="progress-pip filled"></span>
+            <span class="progress-pip filled"></span>
+            <span class="progress-pip filled"></span>
+            <span class="progress-pip filled"></span>
+            <span class="progress-pip filled"></span>
+            <span class="progress-pip filled"></span>
+            <span class="progress-pip"></span>
+          </div>
+        </div>
+
+        <h3 id="title-thinking">Thinking Before Sharing: Why Media Literacy Matters</h3>
+
+        <p>Every day, we receive a huge amount of information through social media, videos, and messaging apps. Some of it is true, but some of it might be false or exaggerated. This is why <strong>critical thinking and media literacy</strong> are so important today: they help us decide what we can trust.</p>
+
+        <p>When I read a surprising piece of news, I try to ask a few questions first. <em>Who wrote this? Could this source have a personal interest in the story?</em> If a headline sounds too dramatic, it might not be telling the whole truth. As a person who works with technology, I know that information can be edited or taken out of context very easily.</p>
+
+        <blockquote class="pull-quote">"A society that thinks critically is less likely to be manipulated by false news, and that protects everyone."</blockquote>
+
+        <p>I consider that <span class="highlight">schools, families, and companies should teach people how to verify information</span>, not only how to find it.</p>
+
+        <span class="read-time">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M12 8v4l3 3"/>
+          </svg>
+          <span class="read-time-count">1 min read</span>
+        </span>
+      </article>
+
+      <!-- 07 · Crime & Punishment -->
+      <article class="entry reveal" id="crime-punishment"
+               style="--cat-color: var(--cat-crime); --cat-rgb: 26,34,54;"
+               aria-labelledby="title-crime">
+        <div class="entry-meta">
+          <div class="entry-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 3v3"/>
+              <path d="M4 8l4-2 4 2-4 2z"/>
+              <path d="M20 8l-4-2-4 2 4 2z"/>
+              <path d="M4 8v3a4 4 0 0 0 8 0V8"/>
+              <path d="M12 8v3a4 4 0 0 0 8 0V8"/>
+              <path d="M6 21h12"/>
+              <path d="M12 12v9"/>
+            </svg>
+          </div>
+          <div class="entry-labels">
+            <div class="entry-cat">Crime and Punishment</div>
+            <div class="entry-num">Post 7 of 7</div>
+          </div>
+          <div class="entry-progress" aria-hidden="true">
+            <span class="progress-pip filled"></span>
+            <span class="progress-pip filled"></span>
+            <span class="progress-pip filled"></span>
+            <span class="progress-pip filled"></span>
+            <span class="progress-pip filled"></span>
+            <span class="progress-pip filled"></span>
+            <span class="progress-pip filled"></span>
+          </div>
+        </div>
+
+        <h3 id="title-crime">Crime and Punishment in the Digital Age</h3>
+
+        <p>As a software student, I am especially interested in a modern kind of crime: <strong>cybercrime</strong>. Every year, thousands of people are affected by data theft, online scams, and identity fraud. Personal information is stolen, bank accounts are emptied, and private photos are leaked, often before the victim even notices what has happened.</p>
+
+        <p>In many countries, new laws have been created to punish these crimes, and cybercriminals can be sent to prison or fined if they are caught. However, I think <strong>punishment alone is not enough</strong>. Software developers must also be trained to build safer systems, so fewer crimes can be committed in the first place.</p>
+
+        <blockquote class="pull-quote">"If future developers like me learn to code responsibly, fewer doors will be left open for criminals."</blockquote>
+
+        <p>I consider that <span class="highlight">prevention and education are as important as punishment</span>. If people understand how these crimes happen, they can protect themselves better.</p>
+
+        <span class="read-time">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M12 8v4l3 3"/>
+          </svg>
+          <span class="read-time-count">1 min read</span>
+        </span>
+      </article>
+
+    </div><!-- /entries -->
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-brand">
+        <div class="footer-logo" aria-hidden="true">CT</div>
+        <div class="footer-text">
+          <strong>Carlos Manuel Turizo Hernández</strong>
+          Análisis y Desarrollo de Software · SENA · Barrancabermeja, Colombia
+        </div>
+      </div>
+      <span class="footer-badge">GA4-240202501-AA1-EV03 · Ficha 3388995</span>
+    </footer>
+
+  </main>
+</div><!-- /wrap -->
+
+<!-- Scripts (deferred, bottom of body) -->
+<script src="js/animations.js" defer></script>
+<script src="js/nav.js" defer></script>
+<script src="js/main.js" defer></script>
+
+</body>
+</html>
